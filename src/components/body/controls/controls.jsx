@@ -10,10 +10,10 @@ class Controls extends React.Component {
     render() {
         return <div className="mdl-grid todo-controls">
             <div className="mdl-cell mdl-cell--3-col mdl-cell--12-phone">
-                <AddItem label="Add category" onSubmit={this.props.onAddCategory} />
+                <AddItem label="Add task" onSubmit={this.props.onAddTask} />
             </div>
             <div className="mdl-layout-spacer"></div>
-            <div className="mdl-cell mdl-cell--3-col mdl-cell--12-phone">
+            <div className="mdl-cell mdl-cell--3-col mdl-cell--hide-phone">
                 <AddItem label="Another input" onSubmit={this.props.onAddSomething} />
             </div>
         </div>;

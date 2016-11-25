@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "webpack",
-    "start": "webpack-dev-server --config ./webpack.config.js --port 7777"
+    "start": "webpack-dev-server --config ./webpack.config.js --port 7777 --quiet"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +25,7 @@
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3",
+    "webpack-dashboard": "0.0.1",
     "webpack-dev-server": "^1.16.2"
   }
 }

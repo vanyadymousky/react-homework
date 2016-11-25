@@ -2,7 +2,9 @@ const DIST_FOLDER = 'dist';
 
 let path = require('path'),
     webpack = require('webpack'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin');
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    Dashboard = require('webpack-dashboard'),
+    DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = {
     output: {
@@ -48,7 +50,8 @@ module.exports = {
         new ExtractTextPlugin('[name].css'),
         new webpack.ProvidePlugin({
             'React': 'react',
-        })
+        }),
+        new DashboardPlugin(new Dashboard().setData)
     ],
     devtool: 'source-map'
 };

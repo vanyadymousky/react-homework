@@ -1,7 +1,9 @@
+$active-filter-border-color: white;
+
 .active-filter {
     margin-right: 2rem;
     .mdl-checkbox__box-outline {
-        border-color: white;
-        background: white;
+        border-color: $active-filter-border-color;
+        background: $active-filter-border-color;
     }
 }
