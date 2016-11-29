@@ -37,11 +37,13 @@ module.exports = {
                 test: /\.scss/,
                 loader: ExtractTextPlugin.extract([
                     'css-loader?sourceMap',
-                    'sass-loader?sourceMap'
+                    'sass-loader?sourceMap',
+                    'sass-resources'
                 ])
             }
         ]
     },
+    sassResources: 'src/scss-resources/*.scss',
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',

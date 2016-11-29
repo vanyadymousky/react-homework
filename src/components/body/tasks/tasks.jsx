@@ -25,7 +25,11 @@ class Tasks extends React.Component {
 
             if (child || !task.parentId) {  // If task is sub-level child or root task
                 list.push(
-                    <Task key={taskKey} item={task} onSelectTask={this.props.onSelectTask} onRemove={this.props.onDeleteTask} />
+                    <Task key={taskKey} item={task}
+                          onAddTask={this.props.onAddTask}
+                          onEditTask={this.props.onEditTask}
+                          onSelectTask={this.props.onSelectTask}
+                          onRemove={this.props.onDeleteTask} />
                 );
             }
 

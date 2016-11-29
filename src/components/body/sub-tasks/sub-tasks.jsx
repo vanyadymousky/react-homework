@@ -109,7 +109,7 @@ class SubTasks extends React.Component {
                             <td className="select-subtask mdl-data-table__cell--non-numeric">
                                 <label htmlFor={subtaskToggleId}>
                                     <input type="checkbox" id={subtaskToggleId}
-                                           onChange={() => this.toggleTask(subtask.id)}
+                                           onChange={this.toggleTask.bind(this, subtask.id)}
                                            checked={subtask.isDone} />
                                 </label>
                             </td>

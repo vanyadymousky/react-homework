@@ -4,9 +4,8 @@
     top: 0;
     left: 0;
     z-index: 2;
-    height: 100%;
-    padding: 0 1rem;
-    box-shadow: #c4c4c4 0 2px 8px;
+    padding: 1rem 1rem;
+    box-shadow: $basic-shadow;
 
     .save-changes {
         margin-right: 1rem;

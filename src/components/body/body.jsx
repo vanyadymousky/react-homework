@@ -59,6 +59,17 @@ class Body extends React.Component {
         });
     }
 
+    onEditTask(name, id) {
+        this.setState({
+            tasks: this.state.tasks.map(task => {
+                if (task.id === id) {
+                    task.name = name;
+                }
+                return task;
+            })
+        });
+    }
+
     updateProgress(count, completed) {
         this.setState({
             subtaskCount: count,
@@ -89,6 +100,8 @@ class Body extends React.Component {
 
                 <div className="mdl-grid">
                     <Tasks list={this.state.tasks}
+                           onAddTask={this.onAddTask.bind(this)}
+                           onEditTask={this.onEditTask.bind(this)}
                            onSelectTask={this.onSelectTask.bind(this)}
                            onDeleteTask={this.onDeleteTask.bind(this)}/>
 

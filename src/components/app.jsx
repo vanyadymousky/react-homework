@@ -2,8 +2,7 @@ import Header from './header/header';
 import Footer from './footer/footer';
 import Body from './body/body';
 
-import './styles/colors.scss';
-import './styles/controls.scss';
+import './styles/defaults.scss';
 
 class App extends React.Component {
     updateShowActive(isActive) {
