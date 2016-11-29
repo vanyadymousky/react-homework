@@ -7,10 +7,8 @@ class SubTasks extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            subtasks: SubtaskData,
-            test: false
+            subtasks: SubtaskData
         };
-        this.currentSubtask = SubtaskData.length && SubtaskData[0];
         this.updateProgress = this.updateProgress.bind(this);
     }
 
@@ -95,7 +93,7 @@ class SubTasks extends React.Component {
 
     render() {
         return <div className="sub-task-container mdl-cell mdl-cell--7-col mdl-cell--12-phone">
-            <EditSubtask ref={editForm => this.editForm = editForm} selected={this.currentSubtask}
+            <EditSubtask ref={editForm => this.editForm = editForm}
                          updateSubtask={this.updateSubtask.bind(this)} />
 
             <table className="subtask-data-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">

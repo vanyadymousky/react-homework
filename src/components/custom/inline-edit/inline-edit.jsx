@@ -1,7 +1,7 @@
 import './inline-edit.scss';
 import AddEditInput from 'src/components/custom/add-item/add-item';
 
-class InlineEdit extends React.Component {
+class InlineEdit extends React.PureComponent {
     constructor(props) {
         super(props);
     }
