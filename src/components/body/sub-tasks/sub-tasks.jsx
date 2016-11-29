@@ -11,6 +11,7 @@ class SubTasks extends React.Component {
             test: false
         };
         this.currentSubtask = SubtaskData.length && SubtaskData[0];
+        this.updateProgress = this.updateProgress.bind(this);
     }
 
     // To make subtasks data store from body
@@ -32,14 +33,25 @@ class SubTasks extends React.Component {
         componentHandler.upgradeDom();
     }
 
+    updateSubtasks(newSubtasks) {
+        this.setState({
+            subtasks: newSubtasks
+        }, this.updateProgress)
+    }
+
     updateProgress() {
         this.props.updateProgress(this.state.subtasks.length, this.getCompletedSubtasks());
     }
 
     toggleTask(subtaskId) {
-        let subTask = this.state.subtasks.find(subtask => subtask.id === subtaskId);
-        subTask.isDone = !subTask.isDone;
-        this.updateProgress();
+        this.updateSubtasks(
+            this.state.subtasks.map(subtask => {
+                if (subtask.id === subtaskId) {
+                    subtask.isDone = !subtask.isDone;
+                }
+                return subtask;
+            })
+        );
     }
 
     onEditTask(subtaskId) {
@@ -49,28 +61,26 @@ class SubTasks extends React.Component {
     }
 
     addSubtask(name, taskId) {
-        this.setState({
-            subtasks: this.state.subtasks.concat({
+        this.updateSubtasks(
+            this.state.subtasks.concat({
                 id: getUniqueId(),
                 taskId: taskId,
                 summary: name,
                 description: '',
                 isDone: false
             })
-        });
-        this.updateProgress();
+        );
     }
 
     updateSubtask(updatedSubtask) {
-        this.setState({
-            subtasks: this.state.subtasks.map(subtask => {
+        this.updateSubtasks(
+            this.state.subtasks.map(subtask => {
                 if (subtask.id === updatedSubtask.id) {
                     Object.assign(subtask, updatedSubtask);
                 }
                 return subtask;
             })
-        });
-        this.updateProgress();
+        );
     }
 
     getByTask(taskId) {
@@ -78,10 +88,9 @@ class SubTasks extends React.Component {
     }
 
     cleanSubtasks(taskIds) {
-        this.setState({
-            subtasks: this.state.subtasks.filter(subtask => !taskIds.includes(subtask.taskId))
-        });
-        this.updateProgress();
+        this.updateSubtasks(
+            this.state.subtasks.filter(subtask => !taskIds.includes(subtask.taskId))
+        );
     }
 
     render() {
