@@ -4,17 +4,21 @@ const PROGRESS_ID = 'p1';
 
 class Progress extends React.Component {
 
-    update(progress) {
-        progress = parseInt(progress, 10);
+    update() {
+        const progress = parseInt(this.props.progress / this.props.total * 100, 10);
         this.$progress.MaterialProgress.setProgress(progress);
     }
 
-    futureUpdate(progress) {
-        this.$progress.addEventListener('mdl-componentupgraded', () => this.update(progress));
+    futureUpdate() {
+        this.$progress.addEventListener('mdl-componentupgraded', () => this.update());
+    }
+
+    componentDidUpdate() {
+        this.update();
     }
 
     componentDidMount() {
-        this.futureUpdate(this.props.progress / this.props.total * 100);
+        this.futureUpdate();
     }
 
     render() {

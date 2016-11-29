@@ -4,7 +4,7 @@ const ITEM_ID_TEMPLATE = 'add-item-input-';
 
 let id = 0;
 
-class AddItem extends React.PureComponent {
+class AddItem extends React.Component {
     constructor(props) {
         super(props);
         this.id = ITEM_ID_TEMPLATE + id++;

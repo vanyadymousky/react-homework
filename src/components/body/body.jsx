@@ -3,61 +3,19 @@ import Controls from './controls/controls';
 import Tasks from './tasks/tasks';
 import SubTasks from './sub-tasks/sub-tasks';
 import getUniqueId from 'src/components/utils/unique-id';
-
-let mockCategoryId = getUniqueId();
-let mockCategoryId2 = getUniqueId();
-let mockCategoryId5 = getUniqueId();
-let mockCategoryId6 = getUniqueId();
-let mockCategoryId7 = getUniqueId();
-let mockCategories = [
-    {
-        id: mockCategoryId,
-        name: 'category1'
-    },
-    {
-        id: mockCategoryId2,
-        name: 'category2_ch_1',
-        parentId: mockCategoryId
-    },
-    {
-        id: getUniqueId(),
-        name: 'category3_ch_2',
-        parentId: mockCategoryId2
-    },
-    {
-        id: getUniqueId(),
-        name: 'category4_ch_2',
-        parentId: mockCategoryId2
-    },
-    {
-        id: mockCategoryId5,
-        name: 'category5'
-    },
-    {
-        id: mockCategoryId6,
-        name: 'category6_ch_5',
-        parentId: mockCategoryId5
-    },
-    {
-        id: mockCategoryId7,
-        name: 'category7_ch_6',
-        parentId: mockCategoryId6
-    },
-    {
-        id: getUniqueId(),
-        name: 'category8_ch_7',
-        parentId: mockCategoryId7
-    }
-];
+import { TaskData } from 'src/data/tasks';
 
 class Body extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            taskCount: 0,
-            completed: 0,
-            tasks: mockCategories
+            subtaskCount: SubTasks.getTotalCount(),
+            completedCount: SubTasks.getCompletedCount(),
+            tasks: TaskData,
+            showActive: false,
+            search: '',
+            currentTask: TaskData.length && TaskData[0].id
         };
     }
 
@@ -75,28 +33,72 @@ class Body extends React.Component {
     }
 
     onDeleteTask(taskId) {
-        // if (!confirm('Sure?')) {
-        //     return;
-        // }
+        if (!confirm('Sure?')) {
+            return;
+        }
         this.setState({
             tasks: this.state.tasks.filter(task =>
             task.id !== taskId && task.parentId !== taskId)
+        });
+        this.subtasks.cleanSubtasks(this.buildTaskIdTree(taskId));
+    }
+
+    buildTaskIdTree(taskId) {
+        let result = [taskId];
+        this.state.tasks.forEach(task => {
+            if (task.parentId === taskId) {
+                result = result.concat(this.buildTaskIdTree(task.id));
+            }
+        });
+        return result;
+    }
+
+    onSelectTask(taskId) {
+        this.setState({
+            currentTask: taskId
+        });
+    }
+
+    updateProgress(count, completed) {
+        this.setState({
+            subtaskCount: count,
+            completedCount: completed
+        });
+    }
+
+    updateShowActive(isActive) {
+        this.setState({
+            showActive: isActive
+        });
+    }
+
+    updateSearch(search) {
+        this.setState({
+            search: search
         });
     }
 
     render() {
         return <main className="mdl-layout__content">
             <div className="page-content">
-                <Progress progress={this.state.completed} total={this.state.taskCount}/>
+                <Progress progress={this.state.completedCount} total={this.state.subtaskCount}/>
 
                 <Controls
-                    onAddTask={value => this.onAddTask(value)}/>
+                    onAddTask={this.onAddTask.bind(this)}
+                    onAddSubTask={name => this.subtasks.addSubtask(name, this.state.currentTask)} />
 
                 <div className="mdl-grid">
                     <Tasks list={this.state.tasks}
-                           onDeleteTask={key => this.onDeleteTask(key)}/>
+                           onSelectTask={this.onSelectTask.bind(this)}
+                           onDeleteTask={this.onDeleteTask.bind(this)}/>
 
-                    <SubTasks />
+                    <div className="mdl-layout-spacer"></div>
+
+                    <SubTasks ref={subtasks => this.subtasks = subtasks}
+                              taskId={this.state.currentTask}
+                              showActive={this.state.showActive}
+                              search={this.state.search}
+                              updateProgress={this.updateProgress.bind(this)} />
                 </div>
             </div>
         </main>;

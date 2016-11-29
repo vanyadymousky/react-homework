@@ -25,7 +25,7 @@ class Tasks extends React.Component {
 
             if (child || !task.parentId) {  // If task is sub-level child or root task
                 list.push(
-                    <Task key={taskKey} item={task} onRemove={this.props.onDeleteTask} />
+                    <Task key={taskKey} item={task} onSelectTask={this.props.onSelectTask} onRemove={this.props.onDeleteTask} />
                 );
             }
 
@@ -41,7 +41,7 @@ class Tasks extends React.Component {
     }
 
     render() {
-        return <div className="tasks-deck mdl-cell mdl-cell--3-col mdl-cell--12-phone">
+        return <div className="tasks-deck mdl-cell mdl-cell--4-col mdl-cell--12-phone">
             <TaskList list={this.buildTaskTree(this.getRootTasks())} />
         </div>;
     }

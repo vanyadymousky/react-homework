@@ -8,7 +8,7 @@ class Header extends React.Component {
             <div className="mdl-layout__header-row normal-header">
                 <span className="mdl-layout-title header-title">ToDo List</span>
                 <div className="mdl-layout-spacer"></div>
-                <Toolbox />
+                <Toolbox updateSearch={this.props.updateSearch} updateShowActive={this.props.updateShowActive} />
             </div>
         </header>;
     }

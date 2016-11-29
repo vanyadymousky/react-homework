@@ -7,8 +7,8 @@ class Toolbox extends React.Component {
 
     render() {
         return <div className="toolbox">
-            <ActiveFilter />
-            <Search />
+            <ActiveFilter updateShowActive={this.props.updateShowActive} />
+            <Search updateSearch={this.props.updateSearch} />
         </div>
     }
 }

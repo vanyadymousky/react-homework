@@ -14,7 +14,7 @@ class Controls extends React.Component {
             </div>
             <div className="mdl-layout-spacer"></div>
             <div className="mdl-cell mdl-cell--3-col mdl-cell--hide-phone">
-                <AddItem label="Another input" onSubmit={this.props.onAddSomething} />
+                <AddItem label="Add subtask" onSubmit={this.props.onAddSubTask} />
             </div>
         </div>;
     }

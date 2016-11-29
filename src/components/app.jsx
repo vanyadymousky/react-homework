@@ -3,12 +3,21 @@ import Footer from './footer/footer';
 import Body from './body/body';
 
 import './styles/colors.scss';
+import './styles/controls.scss';
 
 class App extends React.Component {
+    updateShowActive(isActive) {
+        this.body.updateShowActive(isActive);
+    }
+
+    updateSearch(search) {
+        this.body.updateSearch(search);
+    }
+
     render() {
         return <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                <Header/>
-                <Body/>
+                <Header updateShowActive={this.updateShowActive.bind(this)} updateSearch={this.updateSearch.bind(this)} />
+                <Body ref={body => this.body = body} />
                 <Footer/>
             </div>;
     }

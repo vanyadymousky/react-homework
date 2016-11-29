@@ -1,7 +1,7 @@
 import './task.scss';
 import AddEditItem from 'src/components/custom/add-item/add-item';
 
-class ListItem extends React.PureComponent {
+class ListItem extends React.Component {
 
     openAddSubTaskForm() {
 
@@ -11,10 +11,15 @@ class ListItem extends React.PureComponent {
 
     }
 
+    selectTask(event, taskId) {
+        event.preventDefault();
+        this.props.onSelectTask(taskId);
+    }
+
     render() {
         return <li className="list-item">
             <div>
-                {this.props.item.name}
+                <a href="#" onClick={event => this.selectTask(event, this.props.item.id)}>{this.props.item.name}</a>
                 <button type="button"
                         className="edit-task mdl-button mdl-js-button mdl-button--icon"
                         onClick={() => this.openEditTaskForm(this.props.item.id)}>

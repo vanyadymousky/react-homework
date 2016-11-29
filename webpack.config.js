@@ -49,7 +49,7 @@ module.exports = {
         }),
         new ExtractTextPlugin('[name].css'),
         new webpack.ProvidePlugin({
-            'React': 'react',
+            'React': 'react'
         }),
         new DashboardPlugin(new Dashboard().setData)
     ],
