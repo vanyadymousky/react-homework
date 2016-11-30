@@ -1,5 +1,6 @@
 import './task.scss';
 import InlineEdit from 'src/components/custom/inline-edit/inline-edit';
+import Collapse from 'src/components/custom/collapse/collapse';
 
 class Task extends React.Component {
     constructor(props) {
@@ -23,9 +24,17 @@ class Task extends React.Component {
         this.props.onAddTask(name, parentId);
     }
 
+    getCollapse() {
+        if (this.props.hasChildren) {
+            return <Collapse block={`[data-expandable-for="${this.props.item.id}"]`} expanded={false} />
+        }
+    }
+
     render() {
         let item = this.props.item;
+
         return <li className="list-item">
+
             <InlineEdit ref={inlineEdit => this.inlineEdit = inlineEdit}
                         onSubmit={this.props.onEditTask}
                         id={item.id} value={item.name} />
@@ -35,6 +44,7 @@ class Task extends React.Component {
                         value={`${item.name}_sub`} />
 
             <div>
+                {this.getCollapse()}
                 <a href="#" onClick={event => this.selectTask(event, item.id)}>{item.name}</a>
                 <button type="button"
                         className="edit-task mdl-button mdl-js-button mdl-button--icon"

@@ -4,6 +4,11 @@
     align-items: center;
     position: relative;
 
+    div {
+        align-items: center;
+        display: flex;
+    }
+
     .edit-task i {
         font-size: 1.25rem;
     }

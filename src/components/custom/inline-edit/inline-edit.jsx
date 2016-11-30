@@ -11,16 +11,20 @@ class InlineEdit extends React.PureComponent {
         this.hideInline();
     }
 
+    toggleHidden(force) {
+        this.inlineEdit.classList.toggle('hidden', force);
+    }
+
     hideInline() {
-        this.inlineEdit.classList.add('invisible');
+        this.toggleHidden(true);
     }
 
     activate() {
-        this.inlineEdit.classList.remove('invisible');
+        this.toggleHidden(false);
     }
 
     render() {
-        return <div ref={inlineEdit => this.inlineEdit = inlineEdit} className="inline-edit-control invisible">
+        return <div ref={inlineEdit => this.inlineEdit = inlineEdit} className="inline-edit-control hidden">
             <AddEditInput onSubmit={this.onSubmit.bind(this)}
                           onCancel={this.hideInline.bind(this)}
                           value={this.props.value}

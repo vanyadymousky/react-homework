@@ -26,6 +26,7 @@ class Tasks extends React.Component {
             if (child || !task.parentId) {  // If task is sub-level child or root task
                 list.push(
                     <Task key={taskKey} item={task}
+                          hasChildren={children[0]}
                           onAddTask={this.props.onAddTask}
                           onEditTask={this.props.onEditTask}
                           onSelectTask={this.props.onSelectTask}
@@ -35,7 +36,7 @@ class Tasks extends React.Component {
 
             if (children[0]) { // Has children
                 list.push(
-                    <li key={taskKey + 'children'}>
+                    <li key={taskKey + 'children'} data-expandable-for={task.id}>
                         <TaskList list={this.buildTaskTree(children, true)} />
                     </li>
                 );
