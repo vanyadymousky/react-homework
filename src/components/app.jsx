@@ -1,3 +1,7 @@
+import 'material-design-lite/dist/material.css';
+import 'material-design-lite/dist/material.blue-green.min.css';
+import 'material-design-lite';
+
 import Header from './header/header';
 import Footer from './footer/footer';
 import Body from './body/body';
