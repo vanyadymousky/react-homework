@@ -40,7 +40,7 @@ class Task extends React.Component {
                         id={item.id} value={item.name} />
 
             <InlineEdit ref={inlineEdit => this.inlineAddNested = inlineEdit}
-                        onSubmit={this.addNestedTask.bind(this, item.id)}
+                        onSubmit={() => this.addNestedTask(item.id)}
                         value={`${item.name}_sub`} />
 
             <div>
@@ -48,7 +48,7 @@ class Task extends React.Component {
                 <a href="#" onClick={event => this.selectTask(event, item.id)}>{item.name}</a>
                 <button type="button"
                         className="edit-task mdl-button mdl-js-button mdl-button--icon"
-                        onClick={this.openEditTaskForm.bind(this, item.id)}>
+                        onClick={() => this.openEditTaskForm(item.id)}>
                     <i className="material-icons">mode_edit</i>
                 </button>
             </div>
@@ -60,7 +60,7 @@ class Task extends React.Component {
                 </button>
                 <button type="submit"
                         className="mdl-button mdl-js-button mdl-button--icon"
-                        onClick={this.openAddNestedTaskForm.bind(this, item.id)}>
+                        onClick={() => this.openAddNestedTaskForm(item.id)}>
                     <i className="material-icons">add</i>
                 </button>
             </div>

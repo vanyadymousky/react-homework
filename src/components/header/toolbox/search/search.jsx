@@ -7,6 +7,7 @@ class Search extends React.Component {
         this.state = {
             search: ''
         }
+        this.updateSearch = this.updateSearch.bind(this);
     }
 
     updateSearch(event) {
@@ -22,7 +23,7 @@ class Search extends React.Component {
     render() {
         return <form action="#">
             <div className="mdl-textfield mdl-js-textfield search">
-                <input className="mdl-textfield__input" onChange={this.updateSearch.bind(this)}
+                <input className="mdl-textfield__input" onChange={this.updateSearch}
                        value={this.state.search} type="text" id="sample1"/>
                 <label className="mdl-textfield__label" htmlFor="sample1">Search...</label>
             </div>

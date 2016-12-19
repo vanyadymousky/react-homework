@@ -21,6 +21,10 @@ class Progress extends React.Component {
         this.futureUpdate();
     }
 
+    componentWillUnmount() {
+        this.$progress.removeEventListener('mdl-componentupgraded');
+    }
+
     render() {
         return <div
             id={PROGRESS_ID}

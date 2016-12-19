@@ -8,6 +8,8 @@ class AddItem extends React.PureComponent {
     constructor(props) {
         super(props);
         this.id = ITEM_ID_TEMPLATE + id++;
+        this.onCancel = this.onCancel.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(event) {
@@ -24,7 +26,7 @@ class AddItem extends React.PureComponent {
     }
 
     render() {
-        return <form onSubmit={this.handleSubmit.bind(this)} className="add-item-form">
+        return <form onSubmit={this.handleSubmit} className="add-item-form">
             <div className="mdl-textfield mdl-js-textfield">
                 <input className="mdl-textfield__input"
                        pattern="^([A-z0-9_]){1,20}$"
@@ -38,7 +40,7 @@ class AddItem extends React.PureComponent {
                 <i className="material-icons">done</i>
             </button>
             <button type="button"
-                    onClick={this.onCancel.bind(this)}
+                    onClick={this.onCancel}
                     className="mdl-button mdl-js-button mdl-button--icon">
                 <i className="material-icons">highlight_off</i>
             </button>

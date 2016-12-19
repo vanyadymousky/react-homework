@@ -10,6 +10,7 @@ class SubTasks extends React.Component {
             subtasks: SubtaskData
         };
         this.updateProgress = this.updateProgress.bind(this);
+        this.updateSubtask = this.updateSubtask.bind(this);
     }
 
     // To make subtasks data store from body
@@ -94,20 +95,21 @@ class SubTasks extends React.Component {
     render() {
         return <div className="sub-task-container mdl-cell mdl-cell--7-col mdl-cell--12-phone">
             <EditSubtask ref={editForm => this.editForm = editForm}
-                         updateSubtask={this.updateSubtask.bind(this)} />
+                         updateSubtask={this.updateSubtask} />
 
             <table className="subtask-data-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
                 <tbody>
                 {this.getByTask(this.props.taskId)
-                    .filter(subtask => !this.props.showActive || !subtask.isDone)
-                    .filter(subtask => !this.props.search || subtask.summary.includes(this.props.search))
+                    .filter(subtask =>
+                        (!this.props.showActive || !subtask.isDone) ||
+                        (!this.props.search || subtask.summary.includes(this.props.search))
                     .map(subtask => {
                         let subtaskToggleId = `subtask-toggle-${subtask.id}`;
                         return <tr key={subtask.id}>
                             <td className="select-subtask mdl-data-table__cell--non-numeric">
                                 <label htmlFor={subtaskToggleId}>
                                     <input type="checkbox" id={subtaskToggleId}
-                                           onChange={this.toggleTask.bind(this, subtask.id)}
+                                           onChange={() => this.toggleTask(subtask.id)}
                                            checked={subtask.isDone} />
                                 </label>
                             </td>

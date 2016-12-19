@@ -9,6 +9,13 @@ import Body from './body/body';
 import './styles/defaults.scss';
 
 class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.updateShowActive = this.updateShowActive.bind(this);
+        this.updateSearch = this.updateSearch.bind(this);
+    }
+
     updateShowActive(isActive) {
         this.body.updateShowActive(isActive);
     }
@@ -19,7 +26,7 @@ class App extends React.Component {
 
     render() {
         return <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                <Header updateShowActive={this.updateShowActive.bind(this)} updateSearch={this.updateSearch.bind(this)} />
+                <Header updateShowActive={this.updateShowActive} updateSearch={this.updateSearch} />
                 <Body ref={body => this.body = body} />
                 <Footer/>
             </div>;

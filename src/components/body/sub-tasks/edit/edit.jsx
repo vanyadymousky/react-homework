@@ -9,6 +9,9 @@ class EditSubtask extends React.Component {
             isDone: false,
             description: ''
         };
+        this.updateSubtask = this.updateSubtask.bind(this);
+        this.onSaveSubtask = this.onSaveSubtask.bind(this);
+        this.hideForm = this.hideForm.bind(this);
     }
 
     setSubtask(subtask) {
@@ -41,32 +44,32 @@ class EditSubtask extends React.Component {
         const subtaskIsDoneId = `edit-subtask-${this.state.id}-isdone`;
 
         return <dialog ref={dialog => this.dialog = dialog} className="mdl-dialog">
-            <form action="#" onSubmit={this.onSaveSubtask.bind(this)}>
+            <form action="#" onSubmit={this.onSaveSubtask}>
                 <div className="mdl-dialog__content">
                     <input type="hidden" name="id" value={this.state.id}/>
                     <div className="mdl-textfield mdl-js-textfield">
                         <input className="mdl-textfield__input"
                                placeholder="Task name..."
-                               onChange={this.updateSubtask.bind(this, 'summary')}
+                               onChange={() => this.updateSubtask('summary')}
                                value={this.state.summary} type="text" />
                     </div>
                     <div>
                         <label htmlFor={subtaskIsDoneId}>
                             <input type="checkbox" id={subtaskIsDoneId} checked={this.state.isDone}
-                                   onChange={this.updateSubtask.bind(this, 'isDone')}/>
+                                   onChange={() => this.updateSubtask('isDone')}/>
                             Is done
                         </label>
                     </div>
                     <div className="mdl-textfield mdl-js-textfield">
                         <textarea className="mdl-textfield__input" type="text"
                                   placeholder="Task description..."
-                                  onChange={this.updateSubtask.bind(this, 'description')}
+                                  onChange={() => this.updateSubtask('description')}
                                   value={this.state.description}>
                         </textarea>
                     </div>
                 </div>
                 <div className="mdl-dialog__actions">
-                    <button type="button" onClick={this.hideForm.bind(this)}
+                    <button type="button" onClick={this.hideForm}
                             className="mdl-button mdl-js-button close">
                         Cancel
                     </button>

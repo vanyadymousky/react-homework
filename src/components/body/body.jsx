@@ -17,6 +17,11 @@ class Body extends React.Component {
             search: '',
             currentTask: TaskData.length && TaskData[0].id
         };
+        this.onAddTask = this.onAddTask.bind(this);
+        this.onEditTask = this.onEditTask.bind(this);
+        this.onSelectTask = this.onSelectTask.bind(this);
+        this.onDeleteTask = this.onDeleteTask.bind(this);
+        this.updateProgress = this.updateProgress.bind(this);
     }
 
     onAddTask(taskName, parentId) {
@@ -100,10 +105,10 @@ class Body extends React.Component {
 
                 <div className="mdl-grid">
                     <Tasks list={this.state.tasks}
-                           onAddTask={this.onAddTask.bind(this)}
-                           onEditTask={this.onEditTask.bind(this)}
-                           onSelectTask={this.onSelectTask.bind(this)}
-                           onDeleteTask={this.onDeleteTask.bind(this)}/>
+                           onAddTask={this.onAddTask}
+                           onEditTask={this.onEditTask}
+                           onSelectTask={this.onSelectTask}
+                           onDeleteTask={this.onDeleteTask}/>
 
                     <div className="mdl-layout-spacer"></div>
 
@@ -111,7 +116,7 @@ class Body extends React.Component {
                               taskId={this.state.currentTask}
                               showActive={this.state.showActive}
                               search={this.state.search}
-                              updateProgress={this.updateProgress.bind(this)} />
+                              updateProgress={this.updateProgress} />
                 </div>
             </div>
         </main>;
