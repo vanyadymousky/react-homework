@@ -1,3 +1,11 @@
-.tasks-deck {
+.task-container {
+    position: relative;
 
+    .task-data-table {
+        width: 100%;
+
+        .select-task {
+            width: 3rem;
+        }
+    }
 }

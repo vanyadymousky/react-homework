@@ -1,34 +1,31 @@
 import './search.scss';
 
-class Search extends React.Component {
+class Search extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.state = {
-            search: ''
-        }
         this.updateSearch = this.updateSearch.bind(this);
     }
 
     updateSearch(event) {
-        this.setState({
-            search: event.target.value
-        });
-    }
-
-    componentDidUpdate() {
-        this.props.updateSearch(this.state.search);
+        this.props.onSearchUpdate(event.target.value);
     }
 
     render() {
         return <form action="#">
             <div className="mdl-textfield mdl-js-textfield search">
                 <input className="mdl-textfield__input" onChange={this.updateSearch}
-                       value={this.state.search} type="text" id="sample1"/>
-                <label className="mdl-textfield__label" htmlFor="sample1">Search...</label>
+                       value={this.props.searchQuery} id="search-input"/>
+
+                <label className="mdl-textfield__label" htmlFor="search-input">Search...</label>
             </div>
         </form>;
     }
+}
+
+Search.propTypes = {
+    onSearchUpdate: React.PropTypes.func,
+    searchQuery: React.PropTypes.string
 }
 
 export default Search;

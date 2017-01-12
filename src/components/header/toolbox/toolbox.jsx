@@ -1,16 +1,14 @@
 import './toolbox.scss';
 
-import ActiveFilter from './active-filter/active-filter';
-import Search from './search/search';
+import ActiveFilterContainer from './active-filter/container';
+import SearchContainer from './search/container';
 
-class Toolbox extends React.Component {
+export default class Toolbox extends React.PureComponent {
 
     render() {
         return <div className="toolbox">
-            <ActiveFilter updateShowActive={this.props.updateShowActive} />
-            <Search updateSearch={this.props.updateSearch} />
+            <ActiveFilterContainer />
+            <SearchContainer />
         </div>
     }
 }
-
-export default Toolbox;

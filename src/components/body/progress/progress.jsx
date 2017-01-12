@@ -1,16 +1,18 @@
 import './progress.scss';
 
-const PROGRESS_ID = 'p1';
+import getUniqueId from 'src/utils/unique-id'
+
+const COMPONENT_UPDATED_EVENT = 'mdl-componentupgraded'
 
 class Progress extends React.Component {
 
-    update() {
-        const progress = parseInt(this.props.progress / this.props.total * 100, 10);
-        this.$progress.MaterialProgress.setProgress(progress);
+    constructor(props) {
+        super(props)
+        this.id = `progress-${getUniqueId()}`
     }
 
-    futureUpdate() {
-        this.$progress.addEventListener('mdl-componentupgraded', () => this.update());
+    update() {
+        this.$progress.MaterialProgress.setProgress(this.props.progressValue);
     }
 
     componentDidUpdate() {
@@ -18,19 +20,23 @@ class Progress extends React.Component {
     }
 
     componentDidMount() {
-        this.futureUpdate();
+        this.$progress.addEventListener(COMPONENT_UPDATED_EVENT, () => this.update());
     }
 
     componentWillUnmount() {
-        this.$progress.removeEventListener('mdl-componentupgraded');
+        this.$progress.removeEventListener(COMPONENT_UPDATED_EVENT);
     }
 
     render() {
         return <div
-            id={PROGRESS_ID}
-            ref={progress => { this.$progress = progress; }}
+            id={this.id}
+            ref={progress => this.$progress = progress}
             className="task-progress mdl-progress mdl-js-progress"></div>;
     }
+}
+
+Progress.propTypes = {
+    progressValue: React.PropTypes.number
 }
 
 export default Progress;

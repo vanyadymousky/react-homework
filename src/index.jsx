@@ -1,15 +1,21 @@
 
-import App from 'src/components/app';
-import About from 'src/pages/about';
-import NotFound from 'src/pages/page-404';
-import { Router, Route, hashHistory } from 'react-router'
-import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import ReactDOM from 'react-dom'
+import { createEpicMiddleware } from 'redux-observable'
+import rootEpic from './epics'
+
+import rootReducer from 'src/reducers'
+import App from 'src/components/app'
+import Data from './data/state-schema'
+
+let store = createStore(rootReducer, Data, applyMiddleware(
+    createEpicMiddleware(rootEpic)
+))
 
 ReactDOM.render(
-    <Router history={hashHistory}>
-        <Route path="/" component={App} />
-        <Route path="/about" component={About} />
-        <Route path="*" component={NotFound} />
-    </Router>,
+    <Provider store={store}>
+        <App />
+    </Provider>,
     document.getElementById('root')
 );

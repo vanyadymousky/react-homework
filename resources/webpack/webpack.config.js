@@ -6,20 +6,22 @@ let path = require('path'),
     Dashboard = require('webpack-dashboard'),
     DashboardPlugin = require('webpack-dashboard/plugin');
 
+const cwd = process.cwd()
+
 module.exports = {
     output: {
-        path: path.join(__dirname, DIST_FOLDER),
+        path: path.join(cwd, DIST_FOLDER),
         publicPath: 'http://127.0.0.1:7777/',
         filename: "[name].bundle.js",
         chunkFilename: "[id].bundle.js"
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.css', '.scss'],
-        root: __dirname,
-        modulesDirectories: [__dirname, 'node_modules']
+        root: cwd,
+        modulesDirectories: [cwd, 'node_modules']
     },
     entry: {
-        app: path.join(__dirname, 'src/index'),
+        app: path.join(cwd, 'src/index'),
         vendor: ['react', 'react-dom', 'material-design-lite'],
     },
     module: {
@@ -27,7 +29,7 @@ module.exports = {
             {
                 test: /\.js[x]*$/,
                 loader: 'babel',
-                include: path.join(__dirname, 'src')
+                include: path.join(cwd, 'src')
             }, {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract([

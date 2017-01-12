@@ -1,61 +1,39 @@
 
-class EditSubtask extends React.Component {
+class EditTask extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            id: 0,
-            taskId: 0,
-            summary: 'summary',
-            isDone: false,
-            description: ''
-        };
-        this.updateSubtask = this.updateSubtask.bind(this);
-        this.onSaveSubtask = this.onSaveSubtask.bind(this);
-        this.hideForm = this.hideForm.bind(this);
+        this.hideForm = this.hideForm.bind(this)
     }
 
-    setSubtask(subtask) {
-        this.setState(Object.assign(this.state, subtask));
-        return this;
-    }
-
-    onSaveSubtask(event) {
-        this.props.updateSubtask(this.state);
-        this.hideForm();
-        event.preventDefault();
-    }
-
-    updateSubtask(property, event) {
-        let value = property === 'isDone' ? event.target.checked : event.target.value;
-        this.setState({
-            [property]: value
-        });
+    getTask() {
+        return this.props.task
     }
 
     activate() {
-        this.dialog.showModal();
+        this.dialog.showModal()
     }
 
     hideForm() {
-        this.dialog.close();
+        this.dialog.close()
     }
 
     render() {
-        const subtaskIsDoneId = `edit-subtask-${this.state.id}-isdone`;
+        const id = this.getTask().id
+        const taskIsDoneId = `edit-task-form`
 
         return <dialog ref={dialog => this.dialog = dialog} className="mdl-dialog">
             <form action="#" onSubmit={this.onSaveSubtask}>
                 <div className="mdl-dialog__content">
-                    <input type="hidden" name="id" value={this.state.id}/>
+                    <input type="hidden" name="id" value={id}/>
                     <div className="mdl-textfield mdl-js-textfield">
                         <input className="mdl-textfield__input"
                                placeholder="Task name..."
                                onChange={() => this.updateSubtask('summary')}
-                               value={this.state.summary} type="text" />
+                               value={this.getTask().summary} type="text" />
                     </div>
                     <div>
-                        <label htmlFor={subtaskIsDoneId}>
-                            <input type="checkbox" id={subtaskIsDoneId} checked={this.state.isDone}
+                        <label htmlFor={taskIsDoneId}>
+                            <input type="checkbox" id={taskIsDoneId} checked={this.getTask().isDone}
                                    onChange={() => this.updateSubtask('isDone')}/>
                             Is done
                         </label>
@@ -64,7 +42,7 @@ class EditSubtask extends React.Component {
                         <textarea className="mdl-textfield__input" type="text"
                                   placeholder="Task description..."
                                   onChange={() => this.updateSubtask('description')}
-                                  value={this.state.description}>
+                                  value={this.getTask().description}>
                         </textarea>
                     </div>
                 </div>
@@ -83,4 +61,8 @@ class EditSubtask extends React.Component {
     }
 }
 
-export default EditSubtask;
+EditTask.propTypes = {
+    task: React.PropTypes.object
+}
+
+export default EditTask;

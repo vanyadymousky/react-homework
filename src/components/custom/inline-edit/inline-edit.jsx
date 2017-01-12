@@ -9,7 +9,7 @@ class InlineEdit extends React.PureComponent {
     }
 
     onSubmit(value) {
-        this.props.onSubmit(value, this.props.id);
+        this.props.onSubmit(value);
         this.hideInline();
     }
 

@@ -3,13 +3,26 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+    padding-left: 5px;
+
+    &.drag-enter {
+        padding: 10px;
+    }
+
+    a {
+        color: black;
+    }
+
+    &.active {
+        background-color: aquamarine;
+    }
 
     div {
         align-items: center;
         display: flex;
     }
 
-    .edit-task i {
+    .edit-category i {
         font-size: 1.25rem;
     }
 }
