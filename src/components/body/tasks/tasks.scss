@@ -7,5 +7,11 @@
         .select-task {
             width: 3rem;
         }
+
+        .task-row {
+            &.dragged {
+                opacity: .5;
+            }
+        }
     }
 }

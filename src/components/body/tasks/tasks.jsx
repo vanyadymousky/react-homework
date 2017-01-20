@@ -2,6 +2,10 @@ import './tasks.scss';
 import EditTask from './edit/edit';
 
 class Tasks extends React.Component {
+    constructor(props) {
+        super(props)
+        this.toggleDragged = this.toggleDragged.bind(this)
+    }
 
     onEditTask(taskId) {
         this.editForm
@@ -9,9 +13,13 @@ class Tasks extends React.Component {
             .activate();
     }
 
+    toggleDragged(target) {
+        target.classList.toggle('dragged')
+    }
+
     storeTask(event, taskId) {
-        event.dataTransfer.setData('taskId', taskId)
-        console.log(event.dataTransfer)
+        this.props.onDragTask(taskId)
+        this.toggleDragged(event.target)
     }
 
     render() {
@@ -24,7 +32,9 @@ class Tasks extends React.Component {
                 {this.props.tasks
                     .map(task => {
                         const taskToggleId = `task-toggle-${task.id}`;
-                        return <tr key={task.id} draggable="true" onDragStart={event => this.storeTask(event, task.id)}>
+                        return <tr key={task.id} className="task-row"
+                                   onDragEnd={event => this.toggleDragged(event.target)}
+                                   draggable="true" onDragStart={event => this.storeTask(event, task.id)}>
                             <td className="select-task mdl-data-table__cell--non-numeric">
                                 <label htmlFor={taskToggleId}>
                                     <input type="checkbox" id={taskToggleId}

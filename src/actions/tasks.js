@@ -1,4 +1,6 @@
-import { ADD_TASK, TOGGLE_TASK, UPDATE_TASK, MOVE_TASK, REMOVE_TASK, REMOVE_TASKS_BY_CATEGORY_IDS } from './action-types'
+import {
+    ADD_TASK, TOGGLE_TASK, UPDATE_TASK, MOVE_TASK, REMOVE_TASK, REMOVE_TASKS_BY_CATEGORY_IDS, START_DRAG_TASK
+} from './action-types'
 
 export const addTask = data => ({
     type: ADD_TASK,
@@ -15,9 +17,8 @@ export const updateTask = data => ({
     data
 })
 
-export const moveTask = (fromCategory, toCategory) => ({
+export const moveTask = toCategory => ({
     type: MOVE_TASK,
-    fromCategory,
     toCategory
 })
 
@@ -29,4 +30,9 @@ export const removeTask = id => ({
 export const removeTasksByCategoryIds = categoryIds => ({
     type: REMOVE_TASKS_BY_CATEGORY_IDS,
     categoryIds
+})
+
+export const startDragTask = id => ({
+    type: START_DRAG_TASK,
+    id
 })

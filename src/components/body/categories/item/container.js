@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(removeTasksByCategoryIds(categoryIdsToRemove))
             dispatch(actionCreators.selectTopmostCategory())
         },
-        moveTask:         taskId => dispatch(moveTask(taskId, id))
+        moveTask:         () => dispatch(moveTask(id))
     }
 }
 

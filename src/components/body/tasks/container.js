@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import _ from 'underscore'
 
 import Tasks from './tasks'
-import { addTask, toggleTask, updateTask, removeTask } from 'src/actions/tasks'
+import { addTask, toggleTask, updateTask, removeTask, startDragTask } from 'src/actions/tasks'
 import { SHOW_ALL } from 'src/actions/visibility-filter'
 
 const mapStateToProps = state => ({
@@ -16,6 +16,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     onAddTask: data => dispatch(addTask(data)),
     onToggleTask: id => dispatch(toggleTask(id)),
+    onDragTask: id => dispatch(startDragTask(id)),
     onUpdateTask: data => dispatch(updateTask(data)),
     onRemoveTask: id => dispatch(removeTask(id))
 })

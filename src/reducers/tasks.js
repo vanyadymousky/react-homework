@@ -1,5 +1,7 @@
 import commonReducer from './common'
-import { ADD_TASK, UPDATE_TASK, MOVE_TASK, REMOVE_TASK, REMOVE_TASKS_BY_CATEGORY_IDS, TOGGLE_TASK } from 'src/actions/action-types'
+import {
+    ADD_TASK, UPDATE_TASK, MOVE_TASK, REMOVE_TASK, REMOVE_TASKS_BY_CATEGORY_IDS, TOGGLE_TASK, START_DRAG_TASK
+} from 'src/actions/action-types'
 
 function updateTask(task, data) {
     return {
@@ -31,8 +33,16 @@ export default (state = {}, action) => {
                 ...state,
                 entities: {
                     ...state.entities,
-                    [action.id]: updateTask(state.entities[action.id], )
+                    [state.dragged]: updateTask(state.entities[state.dragged], {
+                        categoryId: action.toCategory
+                    })
                 }
+            }
+
+        case START_DRAG_TASK:
+            return {
+                ...state,
+                dragged: action.id
             }
 
         case REMOVE_TASKS_BY_CATEGORY_IDS:

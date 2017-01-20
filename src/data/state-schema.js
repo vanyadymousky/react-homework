@@ -47,6 +47,7 @@ export default {
     },
     tasks: {
         results: [1,2,3,4,5,6],
+        dragged: null,
         entities: {
             1: {
                 id: 1,

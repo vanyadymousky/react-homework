@@ -24,7 +24,6 @@ class Category extends React.Component {
     dropHighlightDraggedOut(event) {
         this.categoryElement.classList.toggle(DRAG_ENTER)
         if (event.screenX === 0) {
-            console.log(event.dataTransfer.getData('taskId'))
             this.props.moveTask()
         }
     }
