@@ -19,3 +19,7 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
+
+window.document.addEventListener('loaded', function () {
+   console.log('were done');
+});

@@ -3,10 +3,12 @@ import { buildCategoryBinaryTreeById } from 'src/helpers/categories'
 import * as actionCreators from 'src/actions/categories'
 import { removeTasksByCategoryIds, moveTask } from 'src/actions/tasks'
 import Category from './category'
+import _ from 'lodash'
 
 const mapStateToProps = (state, ownProps) => ({
-    categories:       state.categories.entities,
-    isActive:         state.categories.selected === ownProps.item.id
+    categories: state.categories.entities,
+    isActive:   state.categories.selected === ownProps.item.id,
+    taskCount:  _.filter(state.tasks.entities, task => task.categoryId === ownProps.item.id && !task.isDone).length
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {

@@ -16,46 +16,55 @@ module.exports = {
         chunkFilename: "[id].bundle.js"
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.css', '.scss'],
-        root: cwd,
-        modulesDirectories: [cwd, 'node_modules']
+        modules: [ cwd, 'node_modules' ],
+        extensions: ['.js', '.jsx', '.css', '.scss']
     },
     entry: {
         app: path.join(cwd, 'src/index'),
-        vendor: ['react', 'react-dom', 'material-design-lite'],
+        vendor: ['material-design-lite'],
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js[x]*$/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 include: path.join(cwd, 'src')
             }, {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract([
-                    'css-loader?sourceMap'
-                ])
-            },{
-                test: /\.scss/,
-                loader: ExtractTextPlugin.extract([
-                    'css-loader?sourceMap',
-                    'sass-loader?sourceMap',
-                    'sass-resources'
-                ])
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: [
+                        'css-loader'
+                    ]
+                })
+            }, {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract({
+                    fallbackLoader: 'style-loader',
+                    loader: [
+                        'css-loader',
+                        'sass-loader'
+                    ]
+                })
             }
         ]
     },
-    sassResources: 'src/scss-resources/*.scss',
+    devtool: 'source-map',
     plugins: [
+        new webpack.LoaderOptionsPlugin({
+            options: {
+            }
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'vendor.js'
         }),
-        new ExtractTextPlugin('[name].css'),
+        new ExtractTextPlugin({
+            filename: '[name].css'
+        }),
         new webpack.ProvidePlugin({
             'React': 'react'
         }),
         new DashboardPlugin(new Dashboard().setData)
-    ],
-    devtool: 'source-map'
+    ]
 };

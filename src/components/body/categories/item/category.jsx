@@ -54,6 +54,7 @@ class Category extends React.Component {
                 <Button icon="mode_edit" onClick={this.activateInlineEdit} />
             </div>
             <div>
+                {this.props.taskCount}
                 <Button icon="delete_forever" onClick={this.removeCategory} />
                 <Button icon="add" onClick={this.activateAddCategory} />
             </div>

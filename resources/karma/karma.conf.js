@@ -16,10 +16,10 @@ module.exports = function (config) {
         webpack: {
             devtool: 'inline-source-map',
             resolve: {
-                root: process.cwd()
+                modules: [ process.cwd(), 'node_modules' ]
             },
             module: {
-                loaders: [
+                rules: [
                     { test: /\.js$/, loader: 'babel-loader' }, {
                         test: /\.css$/,
                         loader: 'ignore-loader'

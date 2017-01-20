@@ -19,6 +19,9 @@ export const TOGGLE_TASK = 'TOGGLE_TASK'
 export const REMOVE_TASK = 'REMOVE_TASK'
 export const REMOVE_TASKS_BY_CATEGORY_IDS = 'REMOVE_TASKS_BY_CATEGORY_IDS'
 
+export const FETCH_USER = 'FETCH_USER'
+export const FULFILL_USER = 'FULFILL_USER'
+
 /**
  * Visibility
  * @type {string}

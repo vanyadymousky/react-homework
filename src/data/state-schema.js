@@ -91,5 +91,11 @@ export default {
                 isDone: false
             }
         }
+    },
+    user: {
+        login: '',
+        id: '',
+        avatar: '',
+        fetching: false
     }
 }
