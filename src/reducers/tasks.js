@@ -29,15 +29,16 @@ export default (state = {}, action) => {
             }
 
         case MOVE_TASK:
-            return {
+            return state.dragged ? {
                 ...state,
+                dragged: null,
                 entities: {
                     ...state.entities,
                     [state.dragged]: updateTask(state.entities[state.dragged], {
                         categoryId: action.toCategory
                     })
                 }
-            }
+            } : state
 
         case START_DRAG_TASK:
             return {

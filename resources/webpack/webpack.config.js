@@ -21,7 +21,7 @@ module.exports = {
     },
     entry: {
         app: path.join(cwd, 'src/index'),
-        vendor: ['material-design-lite'],
+        vendor: ['react', 'react-dom', 'redux-observable', 'material-design-lite'],
     },
     module: {
         rules: [

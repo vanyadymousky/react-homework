@@ -20,6 +20,6 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-window.document.addEventListener('loaded', function () {
-   console.log('were done');
-});
+window.onload = function() {
+    console.log('done')
+}
