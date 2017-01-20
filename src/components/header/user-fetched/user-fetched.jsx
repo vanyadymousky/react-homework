@@ -5,20 +5,14 @@ export default class UserFetched extends React.Component {
         super(props)
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.fetchUser()
     }
 
-    getIsFetchingText() {
-        if (this.props.user.fetching) {
-            return 'User data is fetching, please wait...'
-        }
-    }
-
     getUserData() {
-        if (!this.props.user.fetching) {
-            return <span>Login: {this.props.user.login} ID: {this.props.user.id}</span>
-        }
+        return this.props.user.fetching ?
+            'User data is fetching, please wait...' :
+            <span>Login: {this.props.user.login} ID: {this.props.user.id}</span>
     }
 
     getUserAvatar() {
@@ -28,7 +22,6 @@ export default class UserFetched extends React.Component {
     render() {
         return <div className="user-fetched">
             <div className="user-avatar" style={{backgroundImage: this.getUserAvatar()}}></div>
-            {this.getIsFetchingText()}
             {this.getUserData()}
         </div>
     }
