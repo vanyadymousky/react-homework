@@ -16,11 +16,15 @@ module.exports = function (config) {
         webpack: {
             devtool: 'inline-source-map',
             resolve: {
-                modules: [ process.cwd(), 'node_modules' ]
+                modules: [ process.cwd(), 'node_modules' ],
+                extensions: ['.js', '.jsx']
             },
             module: {
                 rules: [
-                    { test: /\.js$/, loader: 'babel-loader' }, {
+                    {
+                        test: /\.js[x]*$/,
+                        loader: 'babel-loader'
+                    }, {
                         test: /\.css$/,
                         loader: 'ignore-loader'
                     }, {
@@ -28,7 +32,17 @@ module.exports = function (config) {
                         loader: 'ignore-loader'
                     }
                 ]
-            }
+            },
+            externals: {
+                'react/addons': 'react',
+                'react/lib/ExecutionEnvironment': 'react',
+                'react/lib/ReactContext': 'react'
+            },
+            plugins: [
+                new webpack.ProvidePlugin({
+                    'React': 'react'
+                })
+            ]
         },
         plugins: [
             'karma-jasmine', 'karma-webpack', 'karma-sourcemap-loader', 'karma-chrome-launcher'
