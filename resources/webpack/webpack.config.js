@@ -4,7 +4,8 @@ let path = require('path'),
     webpack = require('webpack'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     Dashboard = require('webpack-dashboard'),
-    DashboardPlugin = require('webpack-dashboard/plugin');
+    DashboardPlugin = require('webpack-dashboard/plugin'),
+    autoprefixer = require('autoprefixer');
 
 const cwd = process.cwd()
 
@@ -34,7 +35,8 @@ module.exports = {
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: 'style-loader',
                     loader: [
-                        'css-loader'
+                        'css-loader',
+                        'postcss-loader'
                     ]
                 })
             }, {
@@ -43,6 +45,7 @@ module.exports = {
                     fallbackLoader: 'style-loader',
                     loader: [
                         'css-loader',
+                        'postcss-loader',
                         'sass-loader'
                     ]
                 })
@@ -53,6 +56,7 @@ module.exports = {
     plugins: [
         new webpack.LoaderOptionsPlugin({
             options: {
+                postcss: [ autoprefixer({ browsers: ['last 5 versions'] }) ]
             }
         }),
         new webpack.optimize.CommonsChunkPlugin({
